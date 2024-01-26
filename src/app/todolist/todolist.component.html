@@ -1,0 +1,57 @@
+<div class="container">
+  <h1>TodoList Application</h1>
+
+  <hr />
+  <form (ngSubmit)="onsubmit(taskform)" #taskform="ngForm">
+    <div class="form-group">
+      <label for="task">Tasks to Do</label>
+      <input
+        type="text"
+        class="form-control"
+        id="task"
+        placeholder="Enter Tasks"
+        ngModel
+        name="task"
+        required
+      />
+      <small
+        *ngIf="taskform.invalid && taskform.dirty"
+        id="errormessage"
+        class="form-text text-danger"
+        >Required Field</small
+      >
+    </div>
+
+    <button
+      [disabled]="taskform.invalid"
+      id="SubmitButton"
+      type="submit"
+      class="btn btn-primary"
+    >
+      Submit
+    </button>
+  </form>
+
+  <hr />
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Task</th>
+        <th scope="col">Complete</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let t of taskarray; index as i">
+        <td>{{ t.taskname }}</td>
+        <td><input (change)="onCheck(i)" id="mycheckbox" type="checkbox" /></td>
+        <td>
+          <button class="btn btn-danger btn-small" (click)="onDelete(i)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
